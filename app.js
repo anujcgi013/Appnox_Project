@@ -1,37 +1,31 @@
-const express=require('express');
-const app=express();
-const mongoose=require('mongoose');
-const dotenv=require('dotenv');
-const User=require('./Model/UserModel');
-const authRouter=require('./Routes/authentication');
-const userInfoRouter=require('./Routes/userInfo');
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const authRouter = require('./routes/authRoute');
+const userRouter = require('./routes/userRoute');
 
 dotenv.config();
+const app = express();
 app.use(express.json());
 
-
-  
-
-mongoose.connect('mongodb://127.0.0.1:27017/authenticationDemo')
-.then(()=>{
-    console.log('DB Connected Successfully')
+mongoose.connect('mongodb://127.0.0.1:27017/authenticationDemo', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
-.catch((err)=>{
-    console.log(err)
+  .then(() => {
+    console.log('DB Connected Successfully');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Server is running at port ${port}`);
 });
 
-
-
-app.use('/auth',authRouter);
-app.use('/user',userInfoRouter);
-
-
-
-
-const port=process.env.port || 3000;
-
-app.listen(port,()=>{
-    console.log(`Server is running at port ${port}`);
-});
-
-
+module.exports = app;

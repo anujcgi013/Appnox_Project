@@ -1,13 +1,14 @@
 {
   "name": "appnox_project",
   "version": "1.0.0",
-  "description": "BackendProject",
-  "main": "index.js",
+  "description": "User API with CRUD operations",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "jest"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ayush Yadav",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -16,5 +17,8 @@
     "joi": "^17.13.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^9.2.0"
   }
 }
